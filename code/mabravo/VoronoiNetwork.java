@@ -375,7 +375,7 @@ public class VoronoiNetwork
         graph.get_en(0);
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("\tgraph with sites, vertices, edges, " + graph.size() + ", " + graph.mVertices.size() + ", " + graph.mEdges.size() + "\n");
+		sb.append("graph with sites, vertices, edges, " + graph.size() + ", " + graph.mVertices.size() + ", " + graph.mEdges.size() + "\n");
 		if (global_debug > 2) {
 			Set<Integer> keys = graph.get_sites().keySet();
 			for(Integer key: keys)

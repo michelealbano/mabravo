@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -ex
+
+javac -classpath code `find code -name "*.java"`
+cd code && jar cf mabravo-1.1.0.jar `find -name "*.class"`
+cd ..
+mv code/mabravo-1.1.0.jar .
+
+java -cp mabravo-1.1.0.jar mabravo.Mabravo 1000 10 5 2 100

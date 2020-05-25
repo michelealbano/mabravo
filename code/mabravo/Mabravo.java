@@ -58,7 +58,7 @@ public class Mabravo extends Canvas implements KeyListener {
 
 	public static void main(String[] args) {
 		if (args.length == 5) {
-			System.out.println("nodes vertices_aoi packets networks seed\n");
+			System.out.println("nodes vertices_aoi packets networks seed");
 			System.out.println(args[0]+" "+args[1]+" "+args[2]+" "+args[3]+" "+args[4]+"\n");
 			Random randomgenerator = new Random(Integer.parseInt(args[4]));
 			int numnetworks = Integer.parseInt(args[3]);
@@ -70,6 +70,7 @@ public class Mabravo extends Canvas implements KeyListener {
 				int num_experiments = Integer.parseInt(args[2]);
 				canvas.processVoronoiNetwork(num_experiments);
 			}
+            System.out.println("End -------------------------");
 		} else if (args.length == 3) {
 			JFrame frame = new JFrame("My Drawing");
 			Random randomgenerator = new Random(Integer.parseInt(args[2]));
@@ -129,6 +130,8 @@ public class Mabravo extends Canvas implements KeyListener {
 	}
 
 	public void processVoronoiNetwork(int num_experiments) {
+        System.out.println("\nStart of experiment ---------");
+
 		System.out.println(vn.SFVoronoi_to_String(vn.globalVoronoiArea.graph));
 		vn.tagAoI(aoi);
 		source = new Point2D[num_experiments];
@@ -137,7 +140,7 @@ public class Mabravo extends Canvas implements KeyListener {
 			source[i] = randomPointInAoI();
 			dest[i] = randomPointInAoI();
 		}
-		System.out.println("src, dest, nodes from visit, nodes in AoI, route length from visit, lunghezza media multicast visita, lunghezza media multicast mabravo, route:");
+		System.out.println("src, dst, total nodes, nodes in AoI, unicast route length (oracle), avg AoIcast route (oracle), avg AoIcast route (mabravo), unicasts route (mabravo):");
 		for (int i = 0 ; i < source.length ; i++) {
 			Vector<Integer> rotta = vn.computeRouting(source[i], dest[i], aoi);
 			StringBuilder sb = new StringBuilder();
@@ -201,7 +204,7 @@ public class Mabravo extends Canvas implements KeyListener {
 		AreaOfInterest aoi = new AreaOfInterest(width, height, points);
 
 		long timenow = java.lang.System.currentTimeMillis();
-		System.out.println("time " + (timenow-timeold));
+//		System.out.println("time " + (timenow-timeold));
 		return aoi;
 	}
 
@@ -216,7 +219,7 @@ public class Mabravo extends Canvas implements KeyListener {
 		myNetwork.createVoronoiNetwork(points);
 
 		long timenow = java.lang.System.currentTimeMillis();
-		System.out.println("time elapsed " + (timenow-timeold));
+//		System.out.println("time elapsed " + (timenow-timeold));
 		timeold = timenow;
 		return myNetwork;
 	}
