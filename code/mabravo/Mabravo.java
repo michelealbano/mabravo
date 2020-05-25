@@ -72,7 +72,7 @@ public class Mabravo extends Canvas implements KeyListener {
 			}
             System.out.println("End -------------------------");
 		} else if (args.length == 3) {
-			JFrame frame = new JFrame("My Drawing");
+			JFrame frame = new JFrame("MABRAVO");
 			Random randomgenerator = new Random(Integer.parseInt(args[2]));
             Mabravo canvas = new Mabravo();
             canvas.number_of_sites_defining_the_AoI = Integer.parseInt(args[1]);
