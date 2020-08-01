@@ -145,7 +145,10 @@ public class VoronoiNetwork
 			Point2D pk = graph.get_sites().get(sk);
 			if (
 				(root.distanceSq(pk) < root.distanceSq(pj))&&
-				cos2(root, pj, pk) > cos2(root, pj, pi)
+                    ( // large cos2(angle) means that the abs(angle) is close to 0
+                        (cos2(root, pj, pk) > cos2(root, pj, pi)) ||
+                        (cos2(root, pj, pk) == cos2(root, pj, pi) && sk < si)
+                    )
 				) {
 					if (global_debug > 5)
 						System.out.println("rejected, node "+sk+" would be better");
@@ -157,7 +160,11 @@ public class VoronoiNetwork
 			Point2D pk = graph.get_sites().get(sk);
 			if (
 				(root.distanceSq(pk) < root.distanceSq(pj))&&
-				cos2(root, pj, pk) > cos2(root, pj, pi)
+                    ( // large cos2(angle) means that the abs(angle) is close to 0
+                        (cos2(root, pj, pk) > cos2(root, pj, pi)) ||
+                        (cos2(root, pj, pk) == cos2(root, pj, pi) && sk < si)
+                    )
+//				cos2(root, pj, pk) > cos2(root, pj, pi)
 				) {
 					if (global_debug > 5)
 						System.out.println("rejected, node "+sk+" would be better");
@@ -328,7 +335,7 @@ public class VoronoiNetwork
 				Integer site_id = it2.next();
 				Point2D site_coord = graph.get_sites().get(site_id);
 				double cos = cos2(destination, current_site, site_coord);
-				if (cos > best_cos || -1 == best_site) {
+				if (cos > best_cos || -1 == best_site || (cos == best_cos && site_id < best_site)) {
 					best_cos = cos;
 					best_site = site_id;
 				}
